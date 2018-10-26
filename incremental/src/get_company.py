@@ -62,7 +62,7 @@ try:
 
     # store in csv
     today = pd.to_datetime('today').strftime('%Y%m%d')
-    company_df.to_csv('./data/raw/kode_saham_{0}.csv'.format(today), index=False)
+    company_df.to_csv('../data/raw/kode_saham_{0}.csv'.format(today), index=False)
     print('Process completed. There are {0} public companies at {1}'.format(company_df.shape[0], today))
 
 finally:
