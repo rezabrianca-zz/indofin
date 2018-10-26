@@ -4,6 +4,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import Select
 import pandas as pd
 import time
+import os
 
 # setup
 opts = Options()
@@ -14,6 +15,7 @@ assert opts.headless
 browser = Chrome('/usr/bin/chromedriver', options=opts)
 # browser = Chrome(options=opts)
 browser.implicitly_wait(1)
+print(os.getcwd())
 
 try:
     # open web page
@@ -60,7 +62,7 @@ try:
 
     # store in csv
     today = pd.to_datetime('today').strftime('%Y%m%d')
-    company_df.to_csv('./incremental/data/raw/kode_saham_{0}.csv'.format(today), index=False)
+    company_df.to_csv('home/ubuntu/indofin/incremental/data/raw/kode_saham_{0}.csv'.format(today), index=False)
     print('Process completed. There are {0} public companies at {1}'.format(company_df.shape[0], today))
 
 finally:
