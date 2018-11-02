@@ -8,7 +8,7 @@ def sendMessage(message):
     sc = SlackClient(slack_token)
     sc.api_call(
         'chat.postMessage',
-        channel='DDNGMN7KK',
+        channel='CDQGU5222',
         text=message,
         username='Slack API'
         )
