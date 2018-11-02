@@ -6,7 +6,7 @@ import pandas as pd
 import time
 import os
 
-from indofin.incremental.src.slack_message import sendMessage
+from slack_message import sendMessage
 sendMessage('Begin cron job.')
 # setup
 opts = Options()
