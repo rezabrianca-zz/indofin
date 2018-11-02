@@ -6,10 +6,8 @@ import pandas as pd
 import time
 import os
 
-os.chdir('/home/ubuntu/indofin/incremental/src/')
-
-from slack_message import sendMessage
-
+from indofin.incremental.src.slack_message import sendMessage
+sendMessage('Begin cron job.')
 # setup
 opts = Options()
 opts.set_headless()
@@ -17,8 +15,9 @@ opts.add_argument('log-level=3') # suppress warning
 
 assert opts.headless
 browser = Chrome('/usr/bin/chromedriver', options=opts)
-# browser = Chrome(options=opts)
+
 browser.implicitly_wait(1)
+os.chdir('/home/ubuntu/indofin/incremental/src/')
 print(os.getcwd())
 
 try:
