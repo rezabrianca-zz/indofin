@@ -73,12 +73,12 @@ for stock in stock_list:
                     print('File not found for {0} - {1} - {2}'.format(stock, quarter, str(year)))
                     pass
 
-    raw_data = pd.DataFrame.from_dict(
+    raw_data = pd.DataFrame.from_dict({
                 'stock_label': stock_dt,
                 'year': year_dt,
                 'quarter': q_dt,
                 'profit': profit_dt
-                )
+                })
 
     os.mkdir('../data/raw/{0}'.format(stock))
 
