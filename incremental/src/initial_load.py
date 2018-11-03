@@ -28,7 +28,7 @@ for stock in stock_list:
                     stock_dt.append(stock)
                     year_dt.append(int(year))
                     q_dt.append(quarter)
-                    profit_dt.append(float(df[df[df.columns[3]] == 'Total profit (loss)'].iloc[:,1].values[0]))
+                    profit_dt.append(df[df[df.columns[3]] == 'Total profit (loss)'].iloc[:,1].values[0])
                     time.sleep(2)
                 except Exception:
                     print('File not found for {0} - {1} - {2}'.format(stock, quarter, str(year)))
@@ -41,7 +41,7 @@ for stock in stock_list:
                     stock_dt.append(stock)
                     year_dt.append(int(year))
                     q_dt.append(quarter)
-                    profit_dt.append(float(df[df[df.columns[3]] == 'Total profit (loss)'].iloc[:,1].values[0]))
+                    profit_dt.append(df[df[df.columns[3]] == 'Total profit (loss)'].iloc[:,1].values[0])
                     time.sleep(2)
                 except Exception:
                     print('File not found for {0} - {1} - {2}'.format(stock, quarter, str(year)))
@@ -54,7 +54,7 @@ for stock in stock_list:
                     stock_dt.append(stock)
                     year_dt.append(int(year))
                     q_dt.append(quarter)
-                    profit_dt.append(float(df[df[df.columns[3]] == 'Total profit (loss)'].iloc[:,1].values[0]))
+                    profit_dt.append(df[df[df.columns[3]] == 'Total profit (loss)'].iloc[:,1].values[0])
                     time.sleep(2)
                 except Exception:
                     print('File not found for {0} - {1} - {2}'.format(stock, quarter, str(year)))
@@ -67,7 +67,7 @@ for stock in stock_list:
                     stock_dt.append(stock)
                     year_dt.append(int(year))
                     q_dt.append(quarter)
-                    profit_dt.append(float(df[df[df.columns[3]] == 'Total profit (loss)'].iloc[:,1].values[0]))
+                    profit_dt.append(df[df[df.columns[3]] == 'Total profit (loss)'].iloc[:,1].values[0])
                     time.sleep(2)
                 except Exception:
                     print('File not found for {0} - {1} - {2}'.format(stock, quarter, str(year)))
