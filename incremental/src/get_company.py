@@ -2,25 +2,16 @@
 from selenium.webdriver import Chrome
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import Select
-from slackclient import SlackClient
 import pandas as pd
 import time
 import os
 
+from slack_message import sendMessage
+
 os.chdir('/home/ubuntu/indofin/incremental/src/')
+today = pd.to_datetime('today').strftime('%Y-%m-%d')
+sendMessage('Begin cron job at {0}'.format(today))
 
-def sendMessage(message):
-    slack_token = os.getenv('SLACK_TOKEN')
-    sc = SlackClient(slack_token)
-    sc.api_call(
-        'chat.postMessage',
-        channel='DDNGMN7KK',
-        text=message,
-        username='Slack API'
-        )
-    return
-
-sendMessage('Begin cron job.')
 # setup
 opts = Options()
 opts.set_headless()
@@ -76,7 +67,6 @@ try:
         company_df = company_df.append(company_df_add, ignore_index=True)
 
     # store in csv
-    today = pd.to_datetime('today').strftime('%Y%m%d')
     company_df.to_csv('../data/raw/kode_saham_{0}.csv'.format(today), index=False)
     print('Process completed. There are {0} public companies at {1}'.format(company_df.shape[0], today))
     sendMessage('Process completed. There are {0} public companies at {1}'.format(company_df.shape[0], today))
