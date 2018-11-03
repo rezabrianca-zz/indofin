@@ -2,13 +2,24 @@
 from selenium.webdriver import Chrome
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import Select
+from slackclient import SlackClient
 import pandas as pd
 import time
 import os
 
 os.chdir('/home/ubuntu/indofin/incremental/src/')
 
-from slack_message import sendMessage
+def sendMessage(message):
+    slack_token = os.getenv('SLACK_TOKEN')
+    sc = SlackClient(slack_token)
+    sc.api_call(
+        'chat.postMessage',
+        channel='DDNGMN7KK',
+        text=message,
+        username='Slack API'
+        )
+    return
+
 sendMessage('Begin cron job.')
 # setup
 opts = Options()
