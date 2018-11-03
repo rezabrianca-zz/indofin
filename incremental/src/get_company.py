@@ -68,8 +68,8 @@ try:
 
     # store in csv
     company_df.to_csv('../data/raw/kode_saham_{0}.csv'.format(today), index=False)
-    print('Process completed. There are {0} public companies at {1}'.format(company_df.shape[0], today))
-    sendMessage('Process completed. There are {0} public companies at {1}'.format(company_df.shape[0], today))
+    print('There are {0} public companies at {1}'.format(company_df.shape[0], today))
+    sendMessage('Get company script completed. There are {0} public companies at {1}'.format(company_df.shape[0], today))
 
 finally:
     # close the browser
