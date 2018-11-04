@@ -71,7 +71,6 @@ except Exception:
 finally:
     # close the browser
     browser.close()
+    sendMessage('Finish getting EPS data at {0}'.format(today))
+    print('Finish getting EPS data at {0}'.format(today))
     quit()
-
-sendMessage('Finish getting EPS data at {0}'.format(today))
-print('Finish getting EPS data at {0}'.format(today))
