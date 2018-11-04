@@ -52,17 +52,16 @@ def percent_growth(dest_path):
     print('Calculate growth per quarter ...')
     df = pd.DataFrame()
     for f in os.listdir(dest_path):
-        for f in filename:
-            print(f.split('.')[0])
-            # read file
-            s = pd.read_csv(dest_path + f)
-            avg_med = s.groupby('stock_label').agg({'percent_change':['mean', 'median']}).reset_index()
-            avg_med.columns = avg_med.columns.map(''.join)
+        print(f.split('.')[0])
+        # read file
+        s = pd.read_csv(dest_path + f)
+        avg_med = s.groupby('stock_label').agg({'percent_change':['mean', 'median']}).reset_index()
+        avg_med.columns = avg_med.columns.map(''.join)
 
-            if df.empty:
-                df = df.append(avg_med, ignore_index=True)
-            else:
-                df = pd.concat([df, avg_med], ignore_index=True)
+        if df.empty:
+            df = df.append(avg_med, ignore_index=True)
+        else:
+            df = pd.concat([df, avg_med], ignore_index=True)
 
     selected = df[(df.percent_changemean > 0) & (df.percent_changemedian > 0)]
     selected.columns = ['stock_label', 'profit_growth_mean', 'profit_growth_median']
