@@ -8,7 +8,7 @@ os.chdir('/home/ubuntu/indofin/incremental/src/')
 today = pd.to_datetime('today').strftime('%Y-%m-%d')
 apikey = os.getenv('API_KEY')
 
-stock_df = pd.read_csv('../data/raw/kode_saham_{0}.csv'.format(date))[['Kode', 'Nama']]
+stock_df = pd.read_csv('../data/raw/kode_saham_{0}.csv'.format(today))[['Kode', 'Nama']]
 selected = pd.read_csv('../data/preprocessed/net_profit_growth/percent_growth_{0}.csv'.format(today))
 
 joined_df = pd.merge(stock_df, selected, left_on='Kode', right_on='stock_label')
