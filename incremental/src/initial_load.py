@@ -29,7 +29,7 @@ for stock in stock_list:
                     year_dt.append(year)
                     q_dt.append(quarter)
                     profit_dt.append(df[df[df.columns[3]] == 'Total profit (loss)'].iloc[:,1].values[0])
-                    time.sleep(2)
+                    time.sleep(1)
                 except Exception:
                     print('File not found for {0} - {1} - {2}'.format(stock, quarter, str(year)))
                     pass
@@ -42,7 +42,7 @@ for stock in stock_list:
                     year_dt.append(year)
                     q_dt.append(quarter)
                     profit_dt.append(df[df[df.columns[3]] == 'Total profit (loss)'].iloc[:,1].values[0])
-                    time.sleep(2)
+                    time.sleep(1)
                 except Exception:
                     print('File not found for {0} - {1} - {2}'.format(stock, quarter, str(year)))
                     pass
@@ -55,7 +55,7 @@ for stock in stock_list:
                     year_dt.append(year)
                     q_dt.append(quarter)
                     profit_dt.append(df[df[df.columns[3]] == 'Total profit (loss)'].iloc[:,1].values[0])
-                    time.sleep(2)
+                    time.sleep(1)
                 except Exception:
                     print('File not found for {0} - {1} - {2}'.format(stock, quarter, str(year)))
                     pass
@@ -68,7 +68,7 @@ for stock in stock_list:
                     year_dt.append(year)
                     q_dt.append(quarter)
                     profit_dt.append(df[df[df.columns[3]] == 'Total profit (loss)'].iloc[:,1].values[0])
-                    time.sleep(2)
+                    time.sleep(1)
                 except Exception:
                     print('File not found for {0} - {1} - {2}'.format(stock, quarter, str(year)))
                     pass
@@ -82,6 +82,6 @@ for stock in stock_list:
 
     # os.mkdir('../data/raw/{0}'.format(stock))
 
-    raw_data.to_csv('../data/raw/{0}/{0}.csv'.format(stock), index=False)
+    raw_data.to_csv('../data/raw/financial_information/{0}.csv'.format(stock), index=False)
 
 sendMessage('Initial load finished.')
