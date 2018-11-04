@@ -19,7 +19,6 @@ selected_df = joined_df[joined_df['profit_growth_median'] > low_threshold]
 s_list = []
 s_mean = []
 s_median = []
-last_price_list = []
 
 print('Begin get top consideration company.')
 for f in os.listdir(source_path):
@@ -30,19 +29,17 @@ for f in os.listdir(source_path):
         s_list.append(f.split('.')[0])
         s_mean.append(s_change_mean)
         s_median.append(s_change_median)
-        last_price_list.append(last_price)
 
 stock_data = pd.DataFrame.from_dict({
             'stock_label':s_list,
             'stock_growth_mean':s_mean,
-            'stock_growth_median':s_median,
-            'last_price':last_price_list
+            'stock_growth_median':s_median
             })
 
 complete_df = pd.merge(selected_df, stock_data, on='stock_label')
 
 threshold = complete_df.stock_growth_median.describe()[5]
 top_consideration = complete_df[complete_df['stock_growth_median'] > threshold].copy()
-top_consideration = top_consideration[['stock_label', 'Nama', 'profit_growth_mean', 'profit_growth_median', 'stock_growth_mean', 'stock_growth_median', 'last_price']]
+top_consideration = top_consideration[['stock_label', 'Nama', 'profit_growth_mean', 'profit_growth_median', 'stock_growth_mean', 'stock_growth_median']]
 top_consideration.to_csv('../data/preprocessed/top_consideration/top_consideration_{0}.csv'.format(today), index=False)
 print('Top consideration at {0} successfully created.')
