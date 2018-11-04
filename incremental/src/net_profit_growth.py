@@ -3,6 +3,8 @@ import os
 import pandas as pd
 import numpy as np
 
+from slack_message import sendMessage
+
 os.chdir('/home/ubuntu/indofin/incremental/src/')
 source_path = '../data/raw/financial_information/'
 dest_path = '../data/preprocessed/financial_information/'
@@ -69,6 +71,7 @@ def percent_growth(dest_path):
     selected.columns = ['stock_label', 'profit_growth_mean', 'profit_growth_median']
     selected.to_csv('../data/preprocessed/net_profit_growth/percent_growth_{0}.csv'.format(today), index=False)
     print('Finish calculating net profit growth.')
+    sendMessage('Finish calculating net profit growth.')
     return
 
 quarter_profit(source_path, dest_path)

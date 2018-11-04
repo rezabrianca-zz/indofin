@@ -4,6 +4,8 @@ import numpy as np
 import time
 import os
 
+from slack_message import sendMessage
+
 os.chdir('/home/ubuntu/indofin/incremental/src/')
 today = pd.to_datetime('today').strftime('%Y-%m-%d')
 apikey = os.getenv('API_KEY')
@@ -25,6 +27,8 @@ s_median = []
 last_price_list = []
 
 print('Begin get stock adjusted price.')
+sendMessage('Begin get stock adjusted price.')
+
 for stock in selected_df.stock_label:
     try:
         dt = pd.read_csv('https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY_ADJUSTED&symbol={0}.JK&apikey={1}&datatype=csv'.format(stock, apikey), usecols=['timestamp', 'adjusted close'])
@@ -76,4 +80,6 @@ for stock in selected_df.stock_label:
     except Exception:
         print('Stock data not found for {0}'.format(stock))
         pass
+
 print('Finish getting stock data.')
+sendMessage('Finish getting stock data.')
