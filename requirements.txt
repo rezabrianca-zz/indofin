@@ -27,7 +27,7 @@ python-dateutil==2.7.3
 PyTweening==1.0.3
 pytz==2018.5
 pyzmq==17.0.0
-requests==2.19.1
+requests==2.20.0
 selenium==3.14.0
 simplegeneric==0.8.1
 six==1.11.0
