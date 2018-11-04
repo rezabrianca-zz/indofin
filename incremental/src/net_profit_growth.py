@@ -15,8 +15,8 @@ def quarter_profit(source_path, dest_path):
             # read file
             s = pd.read_csv(source_path + f)
             if s.shape[0] >= 8: # only read if company has submit report based on the threshold
-                print('Stock Label \t:', f.split('.')[0])
-                print('Last Report Submitted:', s.tail(1)[['quarter', 'year']])
+                # print('Stock Label \t:', f.split('.')[0])
+                # print('Last Report Submitted:', s.tail(1)[['quarter', 'year']])
                 profit = []
                 for i in range(len(s)):
                     # depend on which quarter report company submit, will append accordingly
@@ -45,14 +45,15 @@ def quarter_profit(source_path, dest_path):
 
                 s['q_profit'] = profit
                 s['percent_change'] = s.q_profit.pct_change() * 100.0
-                s.to_csv(dest_path + '{0}.csv'.format(f), index=False)
+                s.to_csv(dest_path + '{0}'.format(f), index=False)
+    print('Finished calculating quarterly profit.')
     return
 
 def percent_growth(dest_path):
     print('Calculate growth per quarter ...')
     df = pd.DataFrame()
     for f in os.listdir(dest_path):
-        print(f.split('.')[0])
+        # print(f.split('.')[0])
         # read file
         s = pd.read_csv(dest_path + f)
         avg_med = s.groupby('stock_label').agg({'percent_change':['mean', 'median']}).reset_index()
@@ -66,6 +67,7 @@ def percent_growth(dest_path):
     selected = df[(df.percent_changemean > 0) & (df.percent_changemedian > 0)]
     selected.columns = ['stock_label', 'profit_growth_mean', 'profit_growth_median']
     selected.to_csv('../data/preprocessed/net_profit_growth/percent_growth_{0}.csv'.format(today), index=False)
+    print('Finish calculating net profit growth.')
     return
 
 quarter_profit(source_path, dest_path)
