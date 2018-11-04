@@ -80,7 +80,7 @@ for stock in stock_list:
                 'profit': profit_dt
                 })
 
-    os.mkdir('../data/raw/{0}'.format(stock))
+    # os.mkdir('../data/raw/{0}'.format(stock))
 
     raw_data.to_csv('../data/raw/{0}/{0}.csv'.format(stock), index=False)
 
