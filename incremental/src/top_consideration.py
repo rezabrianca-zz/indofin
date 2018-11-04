@@ -27,7 +27,7 @@ for f in os.listdir(source_path):
         s_data = pd.read_csv(source_path + f)
         s_change_mean = s_data.percent_gain.describe()[1]
         s_change_median = s_data.percent_gain.describe()[5]
-        s_list.append(stock)
+        s_list.append(f.split('.')[0])
         s_mean.append(s_change_mean)
         s_median.append(s_change_median)
         last_price_list.append(last_price)
