@@ -42,4 +42,4 @@ threshold = complete_df.stock_growth_median.describe()[5]
 top_consideration = complete_df[complete_df['stock_growth_median'] > threshold].copy()
 top_consideration = top_consideration[['stock_label', 'Nama', 'profit_growth_mean', 'profit_growth_median', 'stock_growth_mean', 'stock_growth_median']]
 top_consideration.to_csv('../data/preprocessed/top_consideration/top_consideration_{0}.csv'.format(today), index=False)
-print('Top consideration at {0} successfully created.')
+print('Top consideration at {0} successfully created.'.format(today))
