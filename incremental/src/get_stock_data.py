@@ -17,14 +17,8 @@ joined_df = pd.merge(stock_df, selected, left_on='Kode', right_on='stock_label')
 joined_df = joined_df[['stock_label', 'Nama', 'profit_growth_mean', 'profit_growth_median']]
 
 low_threshold = joined_df.describe()['profit_growth_median'][5]
-high_threshold = joined_df.describe()['profit_growth_median'][6]
 
 selected_df = joined_df[joined_df['profit_growth_median'] > low_threshold]
-
-s_list = []
-s_mean = []
-s_median = []
-last_price_list = []
 
 print('Begin get stock adjusted price.')
 sendMessage('Begin get stock adjusted price.')
@@ -68,13 +62,7 @@ for stock in selected_df.stock_label:
         s_data = s_data.dropna()
         s_data.to_csv('../data/raw/stock_data/{0}.csv'.format(stock), index=False)
 
-        s_change_mean = s_data.percent_gain.describe()[1]
-        s_change_median = s_data.percent_gain.describe()[5]
         print(stock)
-        s_list.append(stock)
-        s_mean.append(s_change_mean)
-        s_median.append(s_change_median)
-        last_price_list.append(last_price)
         time.sleep(15)
 
     except Exception:
