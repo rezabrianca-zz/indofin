@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import pandas as pd
 import os
+import time
 
 os.chdir('/home/ubuntu/indofin/incremental/src/')
 source_path = '../data/raw/stock_data/'
@@ -28,11 +29,14 @@ for f in os.listdir(source_path):
         s_data = pd.read_csv(source_path + f)
         s_change_mean = s_data.percent_gain.describe()[1]
         s_change_median = s_data.percent_gain.describe()[5]
-        s_price = pd.read_csv('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol={0}.JK&apikey={1}&datatype=csv'.format(f.split('.')[0], apikey), usecols=['timestamp', 'adjusted_close'])
+        url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol={0}.JK&apikey={1}&datatype=csv'.format(f.split('.')[0], apikey)
+        print(url)
+        s_price = pd.read_csv(url, usecols=['timestamp', 'adjusted_close'])
         s_list.append(f.split('.')[0])
         s_mean.append(s_change_mean)
         s_median.append(s_change_median)
         last_price.append(s_price.adjusted_close[0])
+        time.sleep(15)
 
 stock_data = pd.DataFrame.from_dict({
             'stock_label':s_list,
