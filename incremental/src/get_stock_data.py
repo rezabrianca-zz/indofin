@@ -8,7 +8,7 @@ from slack_message import sendMessage
 
 os.chdir('/home/ubuntu/indofin/incremental/src/')
 today = pd.to_datetime('today').strftime('%Y-%m-%d')
-apikey = os.getenv('API_KEY')
+apikey = os.getenv('API_TOKEN')
 
 stock_df = pd.read_csv('../data/raw/kode_saham_{0}.csv'.format(today))[['Kode', 'Nama']]
 selected = pd.read_csv('../data/preprocessed/net_profit_growth/percent_growth_{0}.csv'.format(today))

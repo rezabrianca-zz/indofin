@@ -5,7 +5,7 @@ import time
 
 os.chdir('/home/ubuntu/indofin/incremental/src/')
 source_path = '../data/raw/stock_data/'
-apikey = os.getenv('API_KEY')
+apikey = os.getenv('API_TOKEN')
 
 today = pd.to_datetime('today').strftime('%Y-%m-%d')
 stock_df = pd.read_csv('../data/raw/kode_saham_{0}.csv'.format(today))[['Kode', 'Nama']]
