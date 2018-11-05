@@ -8,7 +8,7 @@ os.chdir('/home/ubuntu/indofin/incremental/src/')
 today = pd.to_datetime('today').strftime('%Y-%m-%d')
 eps_path = '../data/raw/eps_data/'
 
-top_df = pd.read_csv('../data/preprocessed/top_consideration_{0}.csv'.format(today))
+top_df = pd.read_csv('../data/preprocessed/top_consideration/top_consideration_{0}.csv'.format(today))
 
 stock = []
 avg_eps = []
