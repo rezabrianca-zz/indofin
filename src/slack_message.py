@@ -18,10 +18,10 @@ def uploadFile(file, title):
 
     slack_token = os.getenv('SLACK_TOKEN')
     sc = SlackClient(slack_token)
-    with open(file) as f:
+    with open(file, 'rb') as f:
         sc.api_call(
             'files.upload',
-            channel='DDNGMN7KK',
+            channels='DDNGMN7KK',
             file=f,
             username='Slack API',
             title=title
