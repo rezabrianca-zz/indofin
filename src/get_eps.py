@@ -69,9 +69,8 @@ for st in stock_list.stock_label:
         print('Could not get complete EPS for {0}'.format(st))
         pass
 
-    finally:
-        # close the browser
-        browser.close()
-        sendMessage('Finish getting EPS data at {0}'.format(today))
-        print('Finish getting EPS data at {0}'.format(today))
-        quit()
+# close the browser
+browser.close()
+sendMessage('Finish getting EPS data at {0}'.format(today))
+print('Finish getting EPS data at {0}'.format(today))
+quit()
