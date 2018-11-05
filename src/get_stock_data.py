@@ -6,7 +6,7 @@ import os
 
 from slack_message import sendMessage
 
-os.chdir('/home/ubuntu/indofin/incremental/src/')
+os.chdir('/home/ubuntu/indofin/src/')
 today = pd.to_datetime('today').strftime('%Y-%m-%d')
 apikey = os.getenv('API_TOKEN')
 
@@ -69,5 +69,5 @@ for stock in selected_df.stock_label:
         print('Stock data not found for {0}'.format(stock))
         pass
 
-print('Finish getting stock data.')
-sendMessage('Finish getting stock data.')
+print('Finish getting stock data at {0}'.format(today))
+sendMessage('Finish getting stock data at {0}'.format(today))

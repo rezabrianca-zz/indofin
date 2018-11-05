@@ -3,7 +3,9 @@ import pandas as pd
 import os
 import time
 
-os.chdir('/home/ubuntu/indofin/incremental/src/')
+from slack_message import sendMessage
+
+os.chdir('/home/ubuntu/indofin/src/')
 source_path = '../data/raw/stock_data/'
 apikey = os.getenv('API_TOKEN')
 
@@ -24,6 +26,7 @@ s_median = []
 last_price = []
 
 print('Begin get top consideration company.')
+sendMessage('Begin get top consideration company')
 for f in os.listdir(source_path):
     if '.csv' in f:
         s_data = pd.read_csv(source_path + f)
@@ -51,3 +54,4 @@ top_consideration = complete_df[complete_df['stock_growth_median'] > threshold].
 top_consideration = top_consideration[['stock_label', 'Nama', 'profit_growth_mean', 'profit_growth_median', 'stock_growth_mean', 'stock_growth_median', 'last_price']]
 top_consideration.to_csv('../data/preprocessed/top_consideration/top_consideration_{0}.csv'.format(today), index=False)
 print('Top consideration at {0} successfully created.'.format(today))
+sendMessage('Top consideration at {0} successfully created.'.format(today))

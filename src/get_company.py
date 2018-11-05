@@ -8,7 +8,7 @@ import os
 
 from slack_message import sendMessage
 
-os.chdir('/home/ubuntu/indofin/incremental/src/')
+os.chdir('/home/ubuntu/indofin/src/')
 today = pd.to_datetime('today').strftime('%Y-%m-%d')
 sendMessage('Begin cron job at {0}'.format(today))
 

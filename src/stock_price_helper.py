@@ -4,7 +4,7 @@ import os
 
 import slack_message as sm
 
-os.chdir('/home/ubuntu/indofin/incremental/src/')
+os.chdir('/home/ubuntu/indofin/src/')
 today = pd.to_datetime('today').strftime('%Y-%m-%d')
 eps_path = '../data/raw/eps_data/'
 

@@ -5,7 +5,7 @@ import os
 
 from slack_message import sendMessage
 
-os.chdir('/home/ubuntu/indofin/incremental/src/')
+os.chdir('/home/ubuntu/indofin/src/')
 
 current_month = pd.to_datetime('today').month
 year = pd.to_datetime('today').year
@@ -49,6 +49,7 @@ def incremental_load(stock_list, existing):
     Loop for each stock data
     Return: csv with additional data, or create new csv if the data is not exist
     '''
+    counter = 0
     for stock in stock_list:
         # if company data exist, append as new row
         if stock in existing:
@@ -59,6 +60,7 @@ def incremental_load(stock_list, existing):
                     quarter = 'TW1'
                     url = 'http://www.idx.co.id/Portals/0/StaticData/ListedCompanies/Corporate_Actions/New_Info_JSX/Jenis_Informasi/01_Laporan_Keuangan/02_Soft_Copy_Laporan_Keuangan//Laporan%20Keuangan%20Tahun%20{year}/{quarter}/{stock}/FinancialStatement-{year}-I-{stock}.xlsx'.format(stock=stock, year=str(year), quarter=quarter)
                     process_response(url, existing_data, stock, year, quarter)
+                    counter += 1
                 except Exception:
                     print('File not found for {0} - {1} - {2}'.format(stock, quarter, str(year)))
                     time.sleep(1)
@@ -68,6 +70,7 @@ def incremental_load(stock_list, existing):
                     quarter = 'TW2'
                     url = 'http://www.idx.co.id/Portals/0/StaticData/ListedCompanies/Corporate_Actions/New_Info_JSX/Jenis_Informasi/01_Laporan_Keuangan/02_Soft_Copy_Laporan_Keuangan//Laporan%20Keuangan%20Tahun%20{year}/{quarter}/{stock}/FinancialStatement-{year}-II-{stock}.xlsx'.format(stock=stock, year=str(year), quarter=quarter)
                     process_response(url, existing_data, stock, year, quarter)
+                    counter += 1
                 except Exception:
                     print('File not found for {0} - {1} - {2}'.format(stock, quarter, str(year)))
                     time.sleep(1)
@@ -77,6 +80,7 @@ def incremental_load(stock_list, existing):
                     quarter = 'TW3'
                     url = 'http://www.idx.co.id/Portals/0/StaticData/ListedCompanies/Corporate_Actions/New_Info_JSX/Jenis_Informasi/01_Laporan_Keuangan/02_Soft_Copy_Laporan_Keuangan//Laporan%20Keuangan%20Tahun%20{year}/{quarter}/{stock}/FinancialStatement-{year}-III-{stock}.xlsx'.format(stock=stock, year=str(year), quarter=quarter)
                     process_response(url, existing_data, stock, year, quarter)
+                    counter += 1
                 except Exception:
                     print('File not found for {0} - {1} - {2}'.format(stock, quarter, str(year)))
                     time.sleep(1)
@@ -87,6 +91,7 @@ def incremental_load(stock_list, existing):
                     last_year = year - 1
                     url = 'http://www.idx.co.id/Portals/0/StaticData/ListedCompanies/Corporate_Actions/New_Info_JSX/Jenis_Informasi/01_Laporan_Keuangan/02_Soft_Copy_Laporan_Keuangan//Laporan%20Keuangan%20Tahun%20{year}/Audit/{stock}/FinancialStatement-{year}-Tahunan-{stock}.xlsx'.format(stock=stock, year=last_year)
                     process_response(url, existing_data, stock, last_year, quarter)
+                    counter += 1
                 except Exception:
                     print('File not found for {0} - {1} - {2}'.format(stock, quarter, str(last_year)))
                     time.sleep(1)
@@ -107,6 +112,7 @@ def incremental_load(stock_list, existing):
                         'profit':[profit]
                         })
                     df.to_csv('{0}{1}.csv'.format(source_path, stock), index=False)
+                    counter += 1
                 except Exception:
                     print('File not found for {0} - {1} - {2}'.format(stock, quarter, str(year)))
                     time.sleep(1)
@@ -125,6 +131,7 @@ def incremental_load(stock_list, existing):
                         'profit':[profit]
                         })
                     df.to_csv('{0}{1}.csv'.format(source_path, stock), index=False)
+                    counter += 1
                 except Exception:
                     print('File not found for {0} - {1} - {2}'.format(stock, quarter, str(year)))
                     time.sleep(1)
@@ -143,6 +150,7 @@ def incremental_load(stock_list, existing):
                         'profit':[profit]
                         })
                     df.to_csv('{0}{1}.csv'.format(source_path, stock), index=False)
+                    counter += 1
                 except Exception:
                     print('File not found for {0} - {1} - {2}'.format(stock, quarter, str(year)))
                     time.sleep(1)
@@ -155,12 +163,21 @@ def incremental_load(stock_list, existing):
                     df = pd.read_excel(url, sheet_name=3, skiprows=2, usecols='A:D')
                     print(stock, year, quarter)
                     profit = df[df[df.columns[3]] == 'Total profit (loss)'].iloc[:,1].values[0]
-                    df = pd.DataFrame.from_dict({'stock_label':[stock], 'year':[int(year)], 'quarter':[quarter], 'profit':[profit]})
-                    df.to_csv('{0}/{1}.csv'.format(source_path, stock), index=False)
+                    df = pd.DataFrame.from_dict({
+                        'stock_label':[stock],
+                        'year':[int(last_year)],
+                        'quarter':[quarter],
+                        'profit':[profit]
+                        })
+                    df.to_csv('{0}{1}.csv'.format(source_path, stock), index=False)
+                    counter += 1
                 except Exception:
                     print('File not found for {0} - {1} - {2}'.format(stock, quarter, str(last_year)))
                     time.sleep(1)
                     pass
-    return
+    print('There are {0} companies already submitted {1} report.'.format(str(counter), quarter))
+    return counter, quarter
 
-incremental_load(stock_list, existing)
+sendMessage('Begin incremental load at {0}'.format(date))
+counter, quarter = incremental_load(stock_list, existing)
+sendMessage('There are {0} companies already submitted {1} report.'.format(str(counter), quarter))
