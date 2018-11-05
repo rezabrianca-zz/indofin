@@ -30,7 +30,6 @@ for f in os.listdir(source_path):
         s_change_mean = s_data.percent_gain.describe()[1]
         s_change_median = s_data.percent_gain.describe()[5]
         url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol={0}.JK&apikey={1}&datatype=csv'.format(f.split('.')[0], apikey)
-        print(url)
         s_price = pd.read_csv(url, usecols=['timestamp', 'adjusted_close'])
         s_list.append(f.split('.')[0])
         s_mean.append(s_change_mean)
