@@ -24,8 +24,9 @@ stock_list = pd.read_csv('../data/preprocessed/top_consideration/top_considerati
 
 sendMessage('Begin get EPS data.')
 print('Begin get EPS data.')
-try:
-    for st in stock_list.stock_label:
+
+for st in stock_list.stock_label:
+    try:
         print('Open webpage for {0}'.format(st))
         # open web page
         browser.get('https://www.indopremier.com/ipotmember/newsSmartSearch.php?code={0}'.format(st))
@@ -64,13 +65,13 @@ try:
         eps_data.to_csv('../data/raw/eps_data/{0}.csv'.format(st), index=False)
         print('Get EPS for {0} is completed.'.format(st))
 
-except Exception:
-    print('Could not get complete EPS for {0}'.format(st))
-    pass
+    except Exception:
+        print('Could not get complete EPS for {0}'.format(st))
+        pass
 
-finally:
-    # close the browser
-    browser.close()
-    sendMessage('Finish getting EPS data at {0}'.format(today))
-    print('Finish getting EPS data at {0}'.format(today))
-    quit()
+    finally:
+        # close the browser
+        browser.close()
+        sendMessage('Finish getting EPS data at {0}'.format(today))
+        print('Finish getting EPS data at {0}'.format(today))
+        quit()
