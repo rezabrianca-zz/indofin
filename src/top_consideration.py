@@ -14,7 +14,7 @@ stock_df = pd.read_csv('../data/raw/kode_saham_{0}.csv'.format(today))[['Kode', 
 selected = pd.read_csv('../data/preprocessed/net_profit_growth/percent_growth_{0}.csv'.format(today))
 
 joined_df = pd.merge(stock_df, selected, left_on='Kode', right_on='stock_label')
-joined_df = joined_df[['stock_label', 'Nama', 'profit_growth_mean', 'profit_growth_median']]
+joined_df = joined_df[['stock_label', 'Nama', 'profit_growth_mean', 'profit_growth_median', 'last_report']]
 
 low_threshold = joined_df.describe()['profit_growth_median'][5]
 
@@ -51,7 +51,7 @@ complete_df = pd.merge(selected_df, stock_data, on='stock_label')
 
 threshold = complete_df.stock_growth_median.describe()[5]
 top_consideration = complete_df[complete_df['stock_growth_median'] > threshold].copy()
-top_consideration = top_consideration[['stock_label', 'Nama', 'profit_growth_mean', 'profit_growth_median', 'stock_growth_mean', 'stock_growth_median', 'last_price']]
+top_consideration = top_consideration[['stock_label', 'Nama', 'profit_growth_mean', 'profit_growth_median', 'last_report','stock_growth_mean', 'stock_growth_median', 'last_price']]
 top_consideration.to_csv('../data/preprocessed/top_consideration/top_consideration_{0}.csv'.format(today), index=False)
 print('Top consideration at {0} successfully created.'.format(today))
 sendMessage('Top consideration at {0} successfully created.'.format(today))

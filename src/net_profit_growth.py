@@ -51,6 +51,7 @@ def quarter_profit(source_path, dest_path):
 
 def percent_growth(dest_path):
     print('Calculate growth per quarter ...')
+    sendMessage('Begin calculating net profit growth at {0}'.format(today))
     df = pd.DataFrame()
     for f in os.listdir(dest_path):
         if '.csv' in f:
@@ -58,6 +59,7 @@ def percent_growth(dest_path):
             s = pd.read_csv(dest_path + f)
             avg_med = s.groupby('stock_label').agg({'percent_change':['mean', 'median']}).reset_index()
             avg_med.columns = avg_med.columns.map(''.join)
+            avg_med['last_report'] = s.tail(1)['quarter'].values[0]
 
             if df.empty:
                 df = df.append(avg_med, ignore_index=True)
@@ -65,7 +67,7 @@ def percent_growth(dest_path):
                 df = pd.concat([df, avg_med], ignore_index=True)
 
     selected = df[(df.percent_changemean > 0) & (df.percent_changemedian > 0)]
-    selected.columns = ['stock_label', 'profit_growth_mean', 'profit_growth_median']
+    selected.columns = ['stock_label', 'profit_growth_mean', 'profit_growth_median', 'last_report']
     selected.to_csv('../data/preprocessed/net_profit_growth/percent_growth_{0}.csv'.format(today), index=False)
     print('Finish calculating net profit growth.')
     sendMessage('Finish calculating net profit growth at {0}.'.format(today))
