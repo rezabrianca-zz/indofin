@@ -44,7 +44,11 @@ def quarter_profit(source_path, dest_path):
                         profit.append(None)
 
                 s['q_profit'] = profit
-                s['percent_change'] = s.q_profit.pct_change() * 100.0
+                percent_change = [None]
+                for j in range(1, s.shape[0]):
+                    pct_change = 100.0 * ((s.q_profit[j] - s.q_profit[j-1]) / abs(s.q_profit[j-1]))
+                    percent_change.append(pct_change)
+                s['percent_change'] = percent_change
                 s.to_csv(dest_path + f, index=False)
     print('Finished calculating quarterly profit.')
     return
