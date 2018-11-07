@@ -55,3 +55,4 @@ top_consideration = top_consideration[['stock_label', 'Nama', 'profit_growth_mea
 top_consideration.to_csv('../data/preprocessed/top_consideration/top_consideration_{0}.csv'.format(today), index=False)
 print('Top consideration at {0} successfully created.'.format(today))
 sendMessage('Top consideration at {0} successfully created.'.format(today))
+sendMessage('There are {0} companies for consideration'.format(str(top_consideration.shape[0])))
