@@ -29,16 +29,22 @@ print('Begin get top consideration company.')
 sendMessage('Begin get top consideration company')
 for f in os.listdir(source_path):
     if '.csv' in f:
-        s_data = pd.read_csv(source_path + f)
-        s_change_mean = s_data.percent_gain.describe()[1]
-        s_change_median = s_data.percent_gain.describe()[5]
-        url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol={0}.JK&apikey={1}&datatype=csv'.format(f.split('.')[0], apikey)
-        s_price = pd.read_csv(url, usecols=['timestamp', 'adjusted_close'])
-        s_list.append(f.split('.')[0])
-        s_mean.append(s_change_mean)
-        s_median.append(s_change_median)
-        last_price.append(s_price.adjusted_close[0])
-        time.sleep(15)
+        try:
+            s_data = pd.read_csv(source_path + f)
+            s_change_mean = s_data.percent_gain.describe()[1]
+            s_change_median = s_data.percent_gain.describe()[5]
+            url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol={0}.JK&apikey={1}&datatype=csv'.format(f.split('.')[0], apikey)
+            s_price = pd.read_csv(url, usecols=['timestamp', 'adjusted_close'])
+            s_list.append(f.split('.')[0])
+            s_mean.append(s_change_mean)
+            s_median.append(s_change_median)
+            last_price.append(s_price.adjusted_close[0])
+            time.sleep(15)
+        except Exception as e:
+            print('Could not get adjusted daily price for {0}'.format(f.split('.')[0]))
+            print('Error Type:', e.__class__.__name__)
+            print('Error Message:', e)
+            pass
 
 stock_data = pd.DataFrame.from_dict({
             'stock_label':s_list,

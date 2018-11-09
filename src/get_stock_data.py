@@ -65,8 +65,10 @@ for stock in selected_df.stock_label:
         print(stock)
         time.sleep(15)
 
-    except Exception:
+    except Exception as e:
         print('Stock data not found for {0}'.format(stock))
+        print('Error Type:', e.__class__.__name__)
+        print('Error Message:', e)
         pass
 
 print('Finish getting stock data at {0}'.format(today))

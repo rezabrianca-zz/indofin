@@ -65,8 +65,10 @@ for st in stock_list.stock_label:
         eps_data.to_csv('../data/raw/eps_data/{0}.csv'.format(st), index=False)
         print('Get EPS for {0} is completed.'.format(st))
 
-    except Exception:
+    except Exception as e:
         print('Could not get complete EPS for {0}'.format(st))
+        print('Error Type:', e.__class__.__name__)
+        print('Error Message:', e)
         pass
 
 # close the browser

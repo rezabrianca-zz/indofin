@@ -61,8 +61,10 @@ def incremental_load(stock_list, existing):
                     url = 'http://www.idx.co.id/Portals/0/StaticData/ListedCompanies/Corporate_Actions/New_Info_JSX/Jenis_Informasi/01_Laporan_Keuangan/02_Soft_Copy_Laporan_Keuangan//Laporan%20Keuangan%20Tahun%20{year}/{quarter}/{stock}/FinancialStatement-{year}-I-{stock}.xlsx'.format(stock=stock, year=str(year), quarter=quarter)
                     process_response(url, existing_data, stock, year, quarter)
                     counter += 1
-                except Exception:
+                except Exception as e:
                     print('File not found for {0} - {1} - {2}'.format(stock, quarter, str(year)))
+                    print('Error Type:', e.__class__.__name__)
+                    print('Error Message:', e)
                     time.sleep(1)
                     pass
             elif current_month in [7,8,9]:
@@ -71,8 +73,10 @@ def incremental_load(stock_list, existing):
                     url = 'http://www.idx.co.id/Portals/0/StaticData/ListedCompanies/Corporate_Actions/New_Info_JSX/Jenis_Informasi/01_Laporan_Keuangan/02_Soft_Copy_Laporan_Keuangan//Laporan%20Keuangan%20Tahun%20{year}/{quarter}/{stock}/FinancialStatement-{year}-II-{stock}.xlsx'.format(stock=stock, year=str(year), quarter=quarter)
                     process_response(url, existing_data, stock, year, quarter)
                     counter += 1
-                except Exception:
+                except Exception as e:
                     print('File not found for {0} - {1} - {2}'.format(stock, quarter, str(year)))
+                    print('Error Type:', e.__class__.__name__)
+                    print('Error Message:', e)
                     time.sleep(1)
                     pass
             elif current_month in [10,11,12]:
@@ -81,8 +85,10 @@ def incremental_load(stock_list, existing):
                     url = 'http://www.idx.co.id/Portals/0/StaticData/ListedCompanies/Corporate_Actions/New_Info_JSX/Jenis_Informasi/01_Laporan_Keuangan/02_Soft_Copy_Laporan_Keuangan//Laporan%20Keuangan%20Tahun%20{year}/{quarter}/{stock}/FinancialStatement-{year}-III-{stock}.xlsx'.format(stock=stock, year=str(year), quarter=quarter)
                     process_response(url, existing_data, stock, year, quarter)
                     counter += 1
-                except Exception:
+                except Exception as e:
                     print('File not found for {0} - {1} - {2}'.format(stock, quarter, str(year)))
+                    print('Error Type:', e.__class__.__name__)
+                    print('Error Message:', e)
                     time.sleep(1)
                     pass
             elif current_month in [1,2,3]:
@@ -92,8 +98,10 @@ def incremental_load(stock_list, existing):
                     url = 'http://www.idx.co.id/Portals/0/StaticData/ListedCompanies/Corporate_Actions/New_Info_JSX/Jenis_Informasi/01_Laporan_Keuangan/02_Soft_Copy_Laporan_Keuangan//Laporan%20Keuangan%20Tahun%20{year}/Audit/{stock}/FinancialStatement-{year}-Tahunan-{stock}.xlsx'.format(stock=stock, year=last_year)
                     process_response(url, existing_data, stock, last_year, quarter)
                     counter += 1
-                except Exception:
+                except Exception as e:
                     print('File not found for {0} - {1} - {2}'.format(stock, quarter, str(last_year)))
+                    print('Error Type:', e.__class__.__name__)
+                    print('Error Message:', e)
                     time.sleep(1)
                     pass
         # if not exist, create new file
@@ -113,8 +121,10 @@ def incremental_load(stock_list, existing):
                         })
                     df.to_csv('{0}{1}.csv'.format(source_path, stock), index=False)
                     counter += 1
-                except Exception:
+                except Exception as e:
                     print('File not found for {0} - {1} - {2}'.format(stock, quarter, str(year)))
+                    print('Error Type:', e.__class__.__name__)
+                    print('Error Message:', e)
                     time.sleep(1)
                     pass
             elif current_month in [7,8,9]:
@@ -132,8 +142,10 @@ def incremental_load(stock_list, existing):
                         })
                     df.to_csv('{0}{1}.csv'.format(source_path, stock), index=False)
                     counter += 1
-                except Exception:
+                except Exception as e:
                     print('File not found for {0} - {1} - {2}'.format(stock, quarter, str(year)))
+                    print('Error Type:', e.__class__.__name__)
+                    print('Error Message:', e)
                     time.sleep(1)
                     pass
             elif current_month in [10,11,12]:
@@ -151,8 +163,10 @@ def incremental_load(stock_list, existing):
                         })
                     df.to_csv('{0}{1}.csv'.format(source_path, stock), index=False)
                     counter += 1
-                except Exception:
+                except Exception as e:
                     print('File not found for {0} - {1} - {2}'.format(stock, quarter, str(year)))
+                    print('Error Type:', e.__class__.__name__)
+                    print('Error Message:', e)
                     time.sleep(1)
                     pass
             elif current_month in [1,2,3]:
@@ -171,8 +185,10 @@ def incremental_load(stock_list, existing):
                         })
                     df.to_csv('{0}{1}.csv'.format(source_path, stock), index=False)
                     counter += 1
-                except Exception:
+                except Exception as e:
                     print('File not found for {0} - {1} - {2}'.format(stock, quarter, str(last_year)))
+                    print('Error Type:', e.__class__.__name__)
+                    print('Error Message:', e)
                     time.sleep(1)
                     pass
     print('There are {0} companies already submitted {1} report.'.format(str(counter), quarter))
