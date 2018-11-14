@@ -16,7 +16,7 @@ def quarter_profit(source_path, dest_path):
         if '.csv' in f:
             # read file
             s = pd.read_csv(source_path + f)
-            if s.shape[0] >= 8 and s.profit.all() > 0: # only read if company has submit report for at least 2 years and always profitable
+            if s.shape[0] >= 8 and (s.profit > 0).all(): # only read if company has submit report for at least 2 years and always profitable
                 profit = []
                 for i in range(len(s)):
                     # depend on which quarter report company submit, will append accordingly
