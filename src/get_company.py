@@ -16,6 +16,7 @@ sendMessage('Begin cron job at {0}'.format(today))
 opts = Options()
 opts.set_headless()
 opts.add_argument('log-level=3') # suppress warning
+opts.add_argument('--no-sandbox')
 
 assert opts.headless
 browser = Chrome('/usr/bin/chromedriver', options=opts)
