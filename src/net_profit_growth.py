@@ -64,6 +64,7 @@ def percent_growth(dest_path):
             avg_med = s.groupby('stock_label').agg({'percent_change':['mean', 'median']}).reset_index()
             avg_med.columns = avg_med.columns.map(''.join)
             avg_med['last_report'] = s.tail(1)['quarter'].values[0]
+            avg_med['last_pct_change'] = s.tail(1)['percent_change'].values[0]
 
             if df.empty:
                 df = df.append(avg_med, ignore_index=True)
@@ -71,7 +72,7 @@ def percent_growth(dest_path):
                 df = pd.concat([df, avg_med], ignore_index=True)
 
     selected = df[(df.percent_changemean > 0) & (df.percent_changemedian > 0)]
-    selected.columns = ['stock_label', 'profit_growth_mean', 'profit_growth_median', 'last_report']
+    selected.columns = ['stock_label', 'profit_growth_mean', 'profit_growth_median', 'last_report', 'last_pct_change']
     selected.to_csv('../data/preprocessed/net_profit_growth/percent_growth_{0}.csv'.format(today), index=False)
     print('Finish calculating net profit growth.')
     sendMessage('Finish calculating net profit growth at {0}.'.format(today))
