@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import pandas as pd
+import numpy as np
 import os
 
 import slack_message as sm
@@ -7,8 +8,18 @@ import slack_message as sm
 os.chdir('/home/ubuntu/indofin/src/')
 today = pd.to_datetime('today').strftime('%Y-%m-%d')
 eps_path = '../data/raw/eps_data/'
+growth_path = '../data/preprocessed/financial_information/'
 
 top_df = pd.read_csv('../data/preprocessed/top_consideration/top_consideration_{0}.csv'.format(today))
+
+last_change_list = []
+for f in os.listdir(growth_path):
+    if '.csv' in f:
+        last_change = pd.read_csv(growth_path + f).tail(1)['percent_change'].values[0]
+        if ~np.isnan(last_change):
+            last_change_list.append(last_change)
+
+tol = np.median(last_change_list)
 
 stock = []
 avg_eps = []
@@ -34,7 +45,7 @@ merged_data.drop(['stock'], axis=1, inplace=True)
 merged_data['diff_percent_with_avg_eps'] = round(100.0 * ((merged_data.last_price - merged_data.avg_eps_25) / merged_data.last_price), 2)
 merged_data['diff_percent_with_last_eps'] = round(100.0 * ((merged_data.last_price - merged_data.last_eps_20) / merged_data.last_price), 2)
 
-selected_data = merged_data[(merged_data.diff_percent_with_avg_eps < 0.0) & (merged_data.diff_percent_with_last_eps < 0.0)].copy()
+selected_data = merged_data[(merged_data.diff_percent_with_avg_eps < 0.0) & (merged_data.diff_percent_with_last_eps < 0.0) & (merged_data.last_pct_change > tol)].copy()
 
 selected_data.to_csv('../data/output/final_data_{0}.csv'.format(today), index=False)
 
