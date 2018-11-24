@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import pandas as pd
+import numpy as np
 import os
 import time
 
@@ -17,8 +18,12 @@ joined_df = pd.merge(stock_df, selected, left_on='Kode', right_on='stock_label')
 joined_df = joined_df[['stock_label', 'Nama', 'profit_growth_mean', 'profit_growth_median', 'last_report', 'last_pct_change']]
 
 low_threshold = joined_df.describe()['profit_growth_median'][5]
+pct_change_threshold = joined_df.describe()['last_pct_change'][5]
 
-selected_df = joined_df[joined_df['profit_growth_median'] > low_threshold]
+print('Median growth: {0} %'.format(str(pct_change_threshold)))
+sm.sendMessage('Median growth: {0} %'.format(str(np.round(pct_change_threshold, 2))))
+
+selected_df = joined_df[(joined_df['profit_growth_median'] > low_threshold) & (joined_df['last_pct_change'] > pct_change_threshold)]
 
 s_list = []
 s_mean = []

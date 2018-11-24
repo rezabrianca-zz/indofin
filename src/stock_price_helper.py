@@ -12,15 +12,6 @@ growth_path = '../data/preprocessed/financial_information/'
 
 top_df = pd.read_csv('../data/preprocessed/top_consideration/top_consideration_{0}.csv'.format(today))
 
-last_change_list = []
-for f in os.listdir(growth_path):
-    if '.csv' in f:
-        last_change = pd.read_csv(growth_path + f).tail(1)['percent_change'].values[0]
-        if ~np.isnan(last_change):
-            last_change_list.append(last_change)
-
-tol = np.median(last_change_list)
-
 stock = []
 avg_eps = []
 last_eps = []
