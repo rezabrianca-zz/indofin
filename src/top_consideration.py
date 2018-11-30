@@ -23,7 +23,7 @@ pct_change_threshold = joined_df.describe()['last_pct_change'][5]
 print('Median growth: {0} %'.format(str(pct_change_threshold)))
 sendMessage('Median growth: {0} %'.format(str(np.round(pct_change_threshold, 2))))
 
-selected_df = joined_df[(joined_df['profit_growth_median'] > low_threshold) & (joined_df['last_pct_change'] > pct_change_threshold)]
+selected_df = joined_df[(joined_df['profit_growth_median'] > low_threshold) & (joined_df['last_pct_change'] > 0)]
 
 s_list = []
 s_mean = []
