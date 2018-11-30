@@ -26,7 +26,7 @@ print(os.getcwd())
 
 try:
     # open web page
-    browser.get('http://www.idx.co.id/perusahaan-tercatat/profil-perusahaan-tercatat/')
+    browser.get('https://www.idx.co.id/perusahaan-tercatat/profil-perusahaan-tercatat/')
 
     # select page to display 100 company in a page
     select = Select(browser.find_element_by_name('companyTable_length'))

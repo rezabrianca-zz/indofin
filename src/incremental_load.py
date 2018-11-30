@@ -58,7 +58,7 @@ def incremental_load(stock_list, existing):
             if current_month in [4,5,6]:
                 try:
                     quarter = 'TW1'
-                    url = 'http://www.idx.co.id/Portals/0/StaticData/ListedCompanies/Corporate_Actions/New_Info_JSX/Jenis_Informasi/01_Laporan_Keuangan/02_Soft_Copy_Laporan_Keuangan//Laporan%20Keuangan%20Tahun%20{year}/{quarter}/{stock}/FinancialStatement-{year}-I-{stock}.xlsx'.format(stock=stock, year=str(year), quarter=quarter)
+                    url = 'https://www.idx.co.id/Portals/0/StaticData/ListedCompanies/Corporate_Actions/New_Info_JSX/Jenis_Informasi/01_Laporan_Keuangan/02_Soft_Copy_Laporan_Keuangan//Laporan%20Keuangan%20Tahun%20{year}/{quarter}/{stock}/FinancialStatement-{year}-I-{stock}.xlsx'.format(stock=stock, year=str(year), quarter=quarter)
                     process_response(url, existing_data, stock, year, quarter)
                     counter += 1
                 except Exception as e:
@@ -70,7 +70,7 @@ def incremental_load(stock_list, existing):
             elif current_month in [7,8,9]:
                 try:
                     quarter = 'TW2'
-                    url = 'http://www.idx.co.id/Portals/0/StaticData/ListedCompanies/Corporate_Actions/New_Info_JSX/Jenis_Informasi/01_Laporan_Keuangan/02_Soft_Copy_Laporan_Keuangan//Laporan%20Keuangan%20Tahun%20{year}/{quarter}/{stock}/FinancialStatement-{year}-II-{stock}.xlsx'.format(stock=stock, year=str(year), quarter=quarter)
+                    url = 'https://www.idx.co.id/Portals/0/StaticData/ListedCompanies/Corporate_Actions/New_Info_JSX/Jenis_Informasi/01_Laporan_Keuangan/02_Soft_Copy_Laporan_Keuangan//Laporan%20Keuangan%20Tahun%20{year}/{quarter}/{stock}/FinancialStatement-{year}-II-{stock}.xlsx'.format(stock=stock, year=str(year), quarter=quarter)
                     process_response(url, existing_data, stock, year, quarter)
                     counter += 1
                 except Exception as e:
@@ -82,7 +82,7 @@ def incremental_load(stock_list, existing):
             elif current_month in [10,11,12]:
                 try:
                     quarter = 'TW3'
-                    url = 'http://www.idx.co.id/Portals/0/StaticData/ListedCompanies/Corporate_Actions/New_Info_JSX/Jenis_Informasi/01_Laporan_Keuangan/02_Soft_Copy_Laporan_Keuangan//Laporan%20Keuangan%20Tahun%20{year}/{quarter}/{stock}/FinancialStatement-{year}-III-{stock}.xlsx'.format(stock=stock, year=str(year), quarter=quarter)
+                    url = 'https://www.idx.co.id/Portals/0/StaticData/ListedCompanies/Corporate_Actions/New_Info_JSX/Jenis_Informasi/01_Laporan_Keuangan/02_Soft_Copy_Laporan_Keuangan//Laporan%20Keuangan%20Tahun%20{year}/{quarter}/{stock}/FinancialStatement-{year}-III-{stock}.xlsx'.format(stock=stock, year=str(year), quarter=quarter)
                     process_response(url, existing_data, stock, year, quarter)
                     counter += 1
                 except Exception as e:
@@ -95,7 +95,7 @@ def incremental_load(stock_list, existing):
                 try:
                     quarter = 'Tahunan'
                     last_year = year - 1
-                    url = 'http://www.idx.co.id/Portals/0/StaticData/ListedCompanies/Corporate_Actions/New_Info_JSX/Jenis_Informasi/01_Laporan_Keuangan/02_Soft_Copy_Laporan_Keuangan//Laporan%20Keuangan%20Tahun%20{year}/Audit/{stock}/FinancialStatement-{year}-Tahunan-{stock}.xlsx'.format(stock=stock, year=last_year)
+                    url = 'https://www.idx.co.id/Portals/0/StaticData/ListedCompanies/Corporate_Actions/New_Info_JSX/Jenis_Informasi/01_Laporan_Keuangan/02_Soft_Copy_Laporan_Keuangan//Laporan%20Keuangan%20Tahun%20{year}/Audit/{stock}/FinancialStatement-{year}-Tahunan-{stock}.xlsx'.format(stock=stock, year=last_year)
                     process_response(url, existing_data, stock, last_year, quarter)
                     counter += 1
                 except Exception as e:
@@ -109,7 +109,7 @@ def incremental_load(stock_list, existing):
             if current_month in [4,5,6]:
                 try:
                     quarter == 'TW1'
-                    url = 'http://www.idx.co.id/Portals/0/StaticData/ListedCompanies/Corporate_Actions/New_Info_JSX/Jenis_Informasi/01_Laporan_Keuangan/02_Soft_Copy_Laporan_Keuangan//Laporan%20Keuangan%20Tahun%20{year}/{quarter}/{stock}/FinancialStatement-{year}-I-{stock}.xlsx'.format(stock=stock, year=str(year), quarter=quarter)
+                    url = 'https://www.idx.co.id/Portals/0/StaticData/ListedCompanies/Corporate_Actions/New_Info_JSX/Jenis_Informasi/01_Laporan_Keuangan/02_Soft_Copy_Laporan_Keuangan//Laporan%20Keuangan%20Tahun%20{year}/{quarter}/{stock}/FinancialStatement-{year}-I-{stock}.xlsx'.format(stock=stock, year=str(year), quarter=quarter)
                     df = pd.read_excel(url, sheet_name=3, skiprows=2, usecols='A:D')
                     print(stock, year, quarter)
                     profit = df[df[df.columns[3]] == 'Total profit (loss)'].iloc[:,1].values[0]
@@ -130,7 +130,7 @@ def incremental_load(stock_list, existing):
             elif current_month in [7,8,9]:
                 try:
                     quarter == 'TW2'
-                    url = 'http://www.idx.co.id/Portals/0/StaticData/ListedCompanies/Corporate_Actions/New_Info_JSX/Jenis_Informasi/01_Laporan_Keuangan/02_Soft_Copy_Laporan_Keuangan//Laporan%20Keuangan%20Tahun%20{year}/{quarter}/{stock}/FinancialStatement-{year}-II-{stock}.xlsx'.format(stock=stock, year=str(year), quarter=quarter)
+                    url = 'https://www.idx.co.id/Portals/0/StaticData/ListedCompanies/Corporate_Actions/New_Info_JSX/Jenis_Informasi/01_Laporan_Keuangan/02_Soft_Copy_Laporan_Keuangan//Laporan%20Keuangan%20Tahun%20{year}/{quarter}/{stock}/FinancialStatement-{year}-II-{stock}.xlsx'.format(stock=stock, year=str(year), quarter=quarter)
                     df = pd.read_excel(url, sheet_name=3, skiprows=2, usecols='A:D')
                     print(stock, year, quarter)
                     profit = df[df[df.columns[3]] == 'Total profit (loss)'].iloc[:,1].values[0]
@@ -151,7 +151,7 @@ def incremental_load(stock_list, existing):
             elif current_month in [10,11,12]:
                 try:
                     quarter == 'TW3'
-                    url = 'http://www.idx.co.id/Portals/0/StaticData/ListedCompanies/Corporate_Actions/New_Info_JSX/Jenis_Informasi/01_Laporan_Keuangan/02_Soft_Copy_Laporan_Keuangan//Laporan%20Keuangan%20Tahun%20{year}/{quarter}/{stock}/FinancialStatement-{year}-III-{stock}.xlsx'.format(stock=stock, year=str(year), quarter=quarter)
+                    url = 'https://www.idx.co.id/Portals/0/StaticData/ListedCompanies/Corporate_Actions/New_Info_JSX/Jenis_Informasi/01_Laporan_Keuangan/02_Soft_Copy_Laporan_Keuangan//Laporan%20Keuangan%20Tahun%20{year}/{quarter}/{stock}/FinancialStatement-{year}-III-{stock}.xlsx'.format(stock=stock, year=str(year), quarter=quarter)
                     df = pd.read_excel(url, sheet_name=3, skiprows=2, usecols='A:D')
                     print(stock, year, quarter)
                     profit = df[df[df.columns[3]] == 'Total profit (loss)'].iloc[:,1].values[0]
@@ -173,7 +173,7 @@ def incremental_load(stock_list, existing):
                 try:
                     quarter == 'Tahunan'
                     last_year = year - 1
-                    url = 'http://www.idx.co.id/Portals/0/StaticData/ListedCompanies/Corporate_Actions/New_Info_JSX/Jenis_Informasi/01_Laporan_Keuangan/02_Soft_Copy_Laporan_Keuangan//Laporan%20Keuangan%20Tahun%20{year}/Audit/{stock}/FinancialStatement-{year}-Tahunan-{stock}.xlsx'.format(stock=stock, year=str(last_year))
+                    url = 'https://www.idx.co.id/Portals/0/StaticData/ListedCompanies/Corporate_Actions/New_Info_JSX/Jenis_Informasi/01_Laporan_Keuangan/02_Soft_Copy_Laporan_Keuangan//Laporan%20Keuangan%20Tahun%20{year}/Audit/{stock}/FinancialStatement-{year}-Tahunan-{stock}.xlsx'.format(stock=stock, year=str(last_year))
                     df = pd.read_excel(url, sheet_name=3, skiprows=2, usecols='A:D')
                     print(stock, year, quarter)
                     profit = df[df[df.columns[3]] == 'Total profit (loss)'].iloc[:,1].values[0]
