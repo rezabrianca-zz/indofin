@@ -19,10 +19,6 @@ parso==0.3.0
 pickleshare==0.7.4
 Pillow==5.1.0
 prompt-toolkit==1.0.15
-PyAutoGUI==0.9.36
-Pygments==2.2.0
-PyMsgBox==1.0.6
-PyScreeze==0.1.14
 python-dateutil==2.7.3
 PyTweening==1.0.3
 pytz==2018.5
