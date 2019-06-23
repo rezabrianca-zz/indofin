@@ -4,7 +4,7 @@ import numpy as np
 import os
 import time
 
-from slack_message import sendMessage
+from slack_message import sendMessage, uploadFile
 
 os.chdir('/home/ubuntu/indofin/src/')
 source_path = '../data/raw/stock_data/'
@@ -67,3 +67,5 @@ top_consideration.to_csv('../data/preprocessed/top_consideration/top_considerati
 print('Top consideration at {0} successfully created.'.format(today))
 sendMessage('Top consideration at {0} successfully created.'.format(today))
 sendMessage('There are {0} companies for consideration'.format(str(top_consideration.shape[0])))
+sendMessage('Uploading top consideration file.')
+uploadFile('../data/preprocessed/top_consideration/top_consideration_{0}.csv'.format(today), 'Top Consideration File')
